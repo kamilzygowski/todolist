@@ -5,13 +5,16 @@ import './ToDo.css';
 
 class ToDo extends React.Component{
 
+    logged = () => {
+        this.props.logged();
+    }
+
     render(){
         return(
             <div className="toDo">
-                <p> :O </p>
-                <FontAwesomeIcon icon={faSignOutAlt} className="logOut"/>
-                <div className="manBody">
-                    <input placeholder="Search" />
+                <FontAwesomeIcon icon={faSignOutAlt} className="logOut" onClick={this.logged} />
+                <div className="mainBody">
+                    <input placeholder="Search" className="searchInput" />
                     <div className="lists">
                         <div className="list">
                             <h3>ToDo list name</h3>

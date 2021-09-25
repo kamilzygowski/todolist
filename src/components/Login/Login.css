@@ -44,3 +44,27 @@
     margin-top:35px;
     cursor: pointer;
 }
+
+.createAccount:hover {
+    color:#fff;
+}
+
+.loginBtn:hover {
+    background:#2ed573;
+    animation: slideIn 0.5s infinite;
+
+}
+
+@keyframes slideIn {
+    from {
+        width:165px;
+      }
+    
+      50% {
+        width:220px;
+      }
+
+      to {
+        width:165px;
+      }
+}

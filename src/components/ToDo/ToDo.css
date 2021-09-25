@@ -5,12 +5,32 @@
 .lists {
     width: 80%;
     margin:35px auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .list {
     display: flex;
     flex-direction: row;
-    width:inherit;
     background: #a4b0be;
     border-radius: 16px;
+    justify-content: space-between;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.searchInput {
+    margin-top:95px;
+}
+
+.logOut {
+    color:#ffa502;
+    font-size: 48px;
+    position: absolute;
+    right:55px;
+    top: 25px;
+}
+
+.logOut:hover {
+    color:#fff;
 }

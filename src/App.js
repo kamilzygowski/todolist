@@ -28,9 +28,15 @@ class App extends React.Component {
   }
 
   logIn = () => {
-    this.setState({
+    if(this.state.loggedIn === false){
+      this.setState({
       loggedIn: true,
     })
+  } else {
+    this.setState({
+      loggedIn: false,
+    })
+  }
   }
 
 
@@ -40,7 +46,7 @@ class App extends React.Component {
       <div className="App">
         {loginView && !loggedIn && <Login toggle={this.toggleLoginAndRegister} logged={this.logIn} />}
         {!loginView && !loggedIn && <Register toggle={this.toggleLoginAndRegister} />}
-        {loggedIn && <ToDo />}
+        {loggedIn && <ToDo logged={this.logIn} />}
       </div>
     );
   }
