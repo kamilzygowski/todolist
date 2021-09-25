@@ -1,0 +1,46 @@
+.window {
+    height: 600px;
+    width: 450px;
+    background-color: #57606f;
+    margin:150px auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.loginHeader {
+    color:#ffa502;
+    margin-top:35px;
+    margin-bottom: 75px;
+}
+
+.username, .password {
+    width: 80%;
+    margin:12px auto;
+    height: 30px;
+    font-size: 17px;
+}
+
+.password {
+
+}
+
+.loginBtn {
+    width: 165px;
+    height: 55px;
+    margin: 0 auto;
+    background: #ffa502;
+    margin-top:35px;
+    border-radius: 7px;
+}
+
+.smallOr {
+    color:#fff;
+    margin-top:35px;
+}
+
+.createAccount {
+    color:#ffa502;
+    font-size:22px;
+    margin-top:35px;
+    cursor: pointer;
+}

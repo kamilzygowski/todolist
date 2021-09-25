@@ -1,0 +1,40 @@
+.register {
+    height: 600px;
+    width: 450px;
+    background-color: #57606f;
+    margin:150px auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.registerHeader {
+    color:#ffa502;
+    margin-top:65px;
+    margin-bottom: 75px;
+}
+
+.inputs {
+    width: 80%;
+    margin:12px auto;
+    height: 30px;
+    font-size: 17px;
+}
+
+.back {
+    font-size: 48px;
+    position: absolute;
+    margin:15px 0 0 15px;
+}
+
+.back:hover {
+    color:#fff;
+}
+
+.createBtn {
+    width: 165px;
+    height: 55px;
+    margin: 0 auto;
+    background: #ffa502;
+    margin-top:35px;
+    border-radius: 7px;
+}

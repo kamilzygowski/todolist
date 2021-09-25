@@ -1,0 +1,16 @@
+.toDo {
+    
+}
+
+.lists {
+    width: 80%;
+    margin:35px auto;
+}
+
+.list {
+    display: flex;
+    flex-direction: row;
+    width:inherit;
+    background: #a4b0be;
+    border-radius: 16px;
+}
