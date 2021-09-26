@@ -1,0 +1,146 @@
+.listView {
+    width:40%;
+    height: 80%;
+    top:10%;
+    left: 30%;
+    background: #40407a;
+    position:absolute;
+}
+
+.listName {
+    margin-top: 25px;
+    width: inherit;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.saveBtn {
+    background-color:#ffa502;
+    bottom: 25px;
+    right: 25px;
+    position: absolute;
+    font-size: 24px;
+    width: 125px;
+    height: 45px;
+    border:none;
+    border-radius: 10px;
+    color:#fff;
+}
+
+.saveBtn:hover {
+    background:#2ed573;
+}
+
+.cancelBtn {
+    cursor: pointer;
+    bottom: 35px;
+    left: 35px;
+    position: absolute;
+    font-size: 24px;
+}
+
+.cancelBtn:hover {
+    color: #fff;
+}
+
+.listSection {
+    padding-bottom: 25px;
+    border-bottom:3px solid #ffa502;
+    
+    top:25px;
+    left:42px;
+    width:85%;
+    
+}
+
+.tasks {
+    position: relative;
+    width:100%;
+    margin: 15px auto;
+    top:20px;
+}
+
+.taskNameInput {
+    width: 80%;
+    border:none;
+    border-bottom: 2px solid #ffa502;
+    background: inherit;
+    height: 25px;
+}
+
+.checkBox {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkmark {
+    position: absolute;
+
+    left: 25px;
+    height: 15px;
+    width: 15px;
+    background: #eee;
+}
+
+.checkBox:checked ~ .checkmark {
+    background:#000;
+}
+
+.checkmark:after {
+    content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkBox:checked ~ .checkmark::after {
+    display: block;
+}
+
+.checkmark::after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.task:hover .checkBox ~ .checkmark {
+    background: blue;
+}
+
+.cancelAddBtn {
+    position: relative;
+    top:25px;
+    width: 95px;
+    height: 40px;
+    right: -150px;
+    background: #ee5253;
+    border-radius: 10px;
+    border:none;
+}
+
+.cancelAddBtn:hover {
+    background: #b33939;
+    color:#fff;
+}
+
+.addBtn {
+    position: relative;
+    top:25px;
+    width: 95px;
+    height: 40px;
+    background: #ffa502;
+    border-radius: 10px;
+    border:none;
+    right: -135px;
+}
+
+.addBtn:hover {
+    background: #cd6133;
+    color:#fff;
+}

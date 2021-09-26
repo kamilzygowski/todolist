@@ -21,6 +21,13 @@
 
 .searchInput {
     margin-top:95px;
+    width: 260px;
+    height: 25px;
+    border-radius: 5px;
+    border:none;
+    font-size:17px;
+    position: relative;
+    left:-420px;
 }
 
 .logOut {
