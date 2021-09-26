@@ -17,6 +17,7 @@
     justify-content: space-between;
     padding-left: 5px;
     padding-right: 5px;
+    margin-block: 10px;
 }
 
 .searchInput {

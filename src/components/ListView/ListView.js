@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import './ListView.css';
 
 class ListView extends React.Component{
@@ -7,6 +7,7 @@ class ListView extends React.Component{
         this.props.toggleListView();
     }
     render(){
+
         return(
             <div className="listView">
                 <span className="listSection">

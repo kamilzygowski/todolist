@@ -1,37 +1,47 @@
-import React from "react";
+import React, {useState} from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import './ToDo.css';
 import ListView from "../ListView/ListView";
 
-class ToDo extends React.Component{
+const ToDo = (props) => {
 
 
-    logged = () => {
-        this.props.logged();
+    const logged = () => {
+        props.logged();
     }
 
-    toggleListView = () => {
-        this.props.toggleListView();
-    }
+    const toggleListView = () => {
+        props.toggleListView();
+    }   
 
-    
+        const [list, setItems] = useState([{
+            name: "XDDD",
+            task: [
+                {
+                taskName : "task1",
+                isDone : false,
+                }
+            ]
+        }])
 
-    render(){
+        const [inputValue] = useState("");
+
         return(
             <div className="toDo">
-                <FontAwesomeIcon icon={faSignOutAlt} className="logOut" onClick={this.logged} />
+                <FontAwesomeIcon icon={faSignOutAlt} className="logOut" onClick={logged} />
                 <input placeholder="Search" className="searchInput" />
                 <div className="mainBody">
                     <div className="lists">
-                        <div className="list" onClick={this.toggleListView}>
-                            <h3>ToDo list name</h3>
+                        {list.map((list) => (<div className="list" onClick={toggleListView}>
+                            <h3>{list.name}</h3>
                             <p> created today</p>
-                            <p> completed:10, all:25</p>
-                        </div>
+                            <p> {list.task.length} completed/{list.task.length} all</p>
+                        </div>))}
+                        
                     </div>
                 </div>
             </div>
         );
-    }
-} export default ToDo;
+ }
+ export default ToDo;
