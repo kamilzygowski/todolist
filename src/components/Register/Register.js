@@ -1,24 +1,60 @@
 import React from "react";
 import './Register.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons'
+import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons';
+import axios from "axios";
 
 class Register extends React.Component {
+
+    constructor(props) {
+        super(props);
+        
+        this.state = {
+           username:"", 
+           email: "", 
+           password: ""
+        }
+    }
+    
 
     toggle = () => {
         this.props.toggle();
     }
 
+    changeHandler = (e) => {
+        this.setState({[e.target.name]: e.target.value})
+    }
+
+    submitHandler = e => {
+        e.preventDefault()
+        console.log(this.state)
+        axios.post('http://recruitment.ultimate.systems', this.state,
+        {
+            headers: {
+                'Authorization': 'Bearer siema'
+            }
+        })
+            .then(response => {
+                console.log(response.config.data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
     render(){
+        const {username, email, password, check} = this.state
         return(
             <div className="register" ref={this.props.containerRef}>
                 <FontAwesomeIcon icon={faLongArrowAltLeft} onClick={this.toggle} className="back" />
                 <h1 className="registerHeader"> Create a new account </h1>
-                <input type="text" placeholder="Username" className="inputs"/>
-                <input type="email" placeholder="E-mail" className="inputs"/>
-                <input type="password" placeholder="Password" className="inputs"/>
-                <input type="password" placeholder="Repeat password" className="inputs"/>
-                <button className="createBtn"> Create </button>
+                <form onSubmit={this.submitHandler}>
+                <input type="text" placeholder="Username" name="username" className="inputs" value={username} onChange={this.changeHandler}/>
+                <input type="email" placeholder="E-mail" name="email"  className="inputs" value={email} onChange={this.changeHandler}/>
+                <input type="password" placeholder="Password" name="password"  className="inputs" value={password} onChange={this.changeHandler}/>
+                <input type="password" placeholder="Repeat password" name="password"  className="inputs" value={check} onChange={this.changeHandler}/>
+                <button type="submit" className="createBtn"> Create </button>
+                </form>
             </div>
         );
     }

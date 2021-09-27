@@ -1,7 +1,30 @@
 import React from 'react';
 import './Login.css';
+import axios from 'axios';
 
 class Login extends React.Component {
+  constructor(props){
+    super(props)
+
+    this.state = {
+      local:[],
+    }
+  }
+
+  componentDidMount() {
+    axios.get('http://recruitment.ultimate.systems', {
+      headers: {
+        'Authorization': 'Bearer siema'
+      }
+    })
+    .then(response => {
+      console.log(response)
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }
+  
 
     toggle = () => {
         this.props.toggle();
