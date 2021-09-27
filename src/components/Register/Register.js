@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 
+const accesToken = 'siema';
+
 class Register extends React.Component {
 
     constructor(props) {
@@ -28,10 +30,10 @@ class Register extends React.Component {
     submitHandler = e => {
         e.preventDefault()
         console.log(this.state)
-        axios.post('http://recruitment.ultimate.systems', this.state,
+        axios.post(`http://recruitment.ultimate.systems`, this.state,
         {
             headers: {
-                'Authorization': 'Bearer siema'
+                Authorization: `Bearer ${accesToken}`,
             }
         })
             .then(response => {

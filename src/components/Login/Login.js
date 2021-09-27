@@ -2,6 +2,8 @@ import React from 'react';
 import './Login.css';
 import axios from 'axios';
 
+const accesToken = 'siema';
+
 class Login extends React.Component {
   constructor(props){
     super(props)
@@ -11,17 +13,19 @@ class Login extends React.Component {
     }
   }
 
-  componentDidMount() {
-    axios.get('http://recruitment.ultimate.systems', {
+  async componentDidMount() {
+    const getLogin = await axios.get('https://recruitment.ultimate.systems?=/auth/local', {
       headers: {
-        'Authorization': 'Bearer siema'
+        Authorization: `Bearer ${accesToken}`,
       }
     })
     .then(response => {
       console.log(response)
+      console.log(getLogin)
     })
     .catch(error => {
       console.log(error)
+      console.log(':(')
     })
   }
   
