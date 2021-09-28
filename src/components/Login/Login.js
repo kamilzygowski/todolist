@@ -14,7 +14,7 @@ class Login extends React.Component {
   }
 
   async componentDidMount() {
-    let getLogin = await axios.get('https://recruitment.ultimate.systems/auth/local/register', {
+    let getLogin = await axios.get('https://recruitment.ultimate.systems?=/auth/local/register', {
       headers: {
         Authorization: `Bearer ${accesToken}`,
       }
