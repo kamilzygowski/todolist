@@ -5,6 +5,14 @@ import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 
 const accesToken = 'siema';
+const apiUrl = 'https://recruitment.ultimate.systems';
+
+const authAxios = axios.create({
+  baseURL: apiUrl,
+  headers: {
+    Authorization: `Bearer ${accesToken}`
+  }
+})
 
 class Register extends React.Component {
 
@@ -30,12 +38,7 @@ class Register extends React.Component {
     submitHandler = (e) => {
         e.preventDefault()
         console.log(this.state)
-        let loadout = axios.post(`https://recruitment.ultimate.systems?=/auth/local/register`, this.state,
-        {
-            headers: {
-                Authorization: `Bearer ${accesToken}`,
-            }
-        })
+        let loadout = authAxios.post(`/auth/local/register`, this.state)
             .then(response => {
                 console.log(response.config.data)
                 console.log(loadout)

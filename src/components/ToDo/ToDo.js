@@ -3,58 +3,70 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import './ToDo.css';
 import ListView from "../ListView/ListView";
+import axios from "axios";
 
-const ToDo = (props) => {
+class ToDo extends React.Component {
 
-
-    const logged = () => {
-        props.logged();
+    constructor(props) {
+        super(props);
+        
+        this.state = {
+            lists: [],
+        }
     }
 
-    const toggleListView = () => {
-        props.toggleListView();
+
+    logged = () => {
+        this.props.logged();
+    }
+
+    toggleListView = () => {
+        this.props.toggleListView();
+    }
+
+    componentDidMount() {
+        axios.get('https://recruitment.ultimate.systems/to-do-lists', {
+            headers: {
+              'Authorization': 'Bearer siema'
+            }
+          })
+        .then(response => {
+            console.log(response)
+            this.setState({lists: response.data})
+        })
+        .catch(error => {
+            console.log(error)
+        })
     }
     
     /*const searchList = (rows) => {
         return rows.filter((row) => row.name.toLowerCase().indexOf(q) > -1);
     }*/
-
-        const [lists, setList] = useState([{
-            key:0,
-            name: "XDDD",
-            task: [
-                {
-                taskName : "task1",
-                isDone : false,
-                }
-            ]},{
-            key:1,
-            name: "ooo",
-            task: [
-                {
-                    taskName : "task1",
-                    isDone : false,
-                    }
-            ]
-        }])
-
-        const [q, setQ] = useState("");
+    render() {
+      const {lists} = this.state;
 
         return(
             <div className="toDo">
-                <FontAwesomeIcon icon={faSignOutAlt} className="logOut" onClick={logged} />
-                <input placeholder="Search" className="searchInput" value={q} onChange={(e) => setQ(e.target.value)} />
+                <FontAwesomeIcon icon={faSignOutAlt} className="logOut" onClick={this.logged} />
+                <input placeholder="Search" className="searchInput" />
                 <div className="mainBody">
                     <div className="lists">
-                        {lists.map((list) => (<div className="list" onClick={toggleListView}>
+                        {lists.map((list) => (<div className="list" onClick={this.toggleListView}>
                             <h3>{list.name}</h3>
                             <p> created today</p>
                             <p> {list.task.length} completed/{list.task.length} all</p>
                         </div>))}
+
+                        <div className="list" onClick={this.toggleListView}>
+                            <h3>xx</h3>
+                            <p> created today</p>
+                            <p> xx completed/xx all</p>
+                        </div>
                         
                     </div>
                 </div>
             </div>
         );
  }
+}
  export default ToDo;
