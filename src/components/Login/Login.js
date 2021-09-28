@@ -14,7 +14,7 @@ class Login extends React.Component {
   }
 
   async componentDidMount() {
-    let getLogin = await axios.get('https://recruitment.ultimate.systems?=/auth/local', {
+    let getLogin = await axios.get('https://recruitment.ultimate.systems/auth/local/register', {
       headers: {
         Authorization: `Bearer ${accesToken}`,
       }
@@ -35,7 +35,8 @@ class Login extends React.Component {
     }
 
     logged = () => {
-        this.props.logged();
+      this.componentDidMount()
+        this.props.logged()
     }
 
 
