@@ -27,10 +27,10 @@ class Register extends React.Component {
         this.setState({[e.target.name]: e.target.value})
     }
 
-    submitHandler = e => {
+    async submitHandler (e) {
         e.preventDefault()
         console.log(this.state)
-        axios.post(`http://recruitment.ultimate.systems`, this.state,
+        let loadout = await axios.post(`https://recruitment.ultimate.systems`, this.state,
         {
             headers: {
                 Authorization: `Bearer ${accesToken}`,
@@ -38,6 +38,7 @@ class Register extends React.Component {
         })
             .then(response => {
                 console.log(response.config.data)
+                console.log('Loudout = ' + loadout)
             })
             .catch(error => {
                 console.log(error)
