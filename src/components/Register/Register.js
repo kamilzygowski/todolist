@@ -27,10 +27,10 @@ class Register extends React.Component {
         this.setState({[e.target.name]: e.target.value})
     }
 
-    async submitHandler (e) {
+    submitHandler (e) {
         e.preventDefault()
         console.log(this.state)
-        let loadout = await axios.post(`https://recruitment.ultimate.systems`, this.state,
+        let loadout = axios.post(`https://recruitment.ultimate.systems`, this.state,
         {
             headers: {
                 Authorization: `Bearer ${accesToken}`,
