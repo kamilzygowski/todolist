@@ -5,7 +5,7 @@ import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 
 const accesToken = 'siema';
-const apiUrl = 'https://recruitment.ultimate.systems';
+const apiUrl = 'http://localhost:8000';
 
 const authAxios = axios.create({
   baseURL: apiUrl,
@@ -38,9 +38,9 @@ class Register extends React.Component {
     submitHandler = (e) => {
         e.preventDefault()
         console.log(this.state)
-        let loadout = authAxios.post(`/auth/local/register`, this.state)
+        let loadout = authAxios.post(`/register`, this.state)
             .then(response => {
-                console.log(response.config.data)
+                console.log(response)
                 console.log(loadout)
             })
             .catch(error => {

@@ -1,10 +1,9 @@
 import React from 'react';
 import './Login.css';
 import axios from 'axios';
-import { config } from '@fortawesome/fontawesome-svg-core';
 
 const accesToken = 'siema';
-const apiUrl = 'https://recruitment.ultimate.systems';
+const apiUrl = 'http://localhost:8000';
 
 const authAxios = axios.create({
   baseURL: apiUrl,
@@ -23,9 +22,9 @@ class Login extends React.Component {
     }
   }
 
-  componentDidMount() {
+  postLogin() {
 
-    const postLogin = authAxios.post(`/auth/local`, this.state)
+    const postLogin = authAxios.post(`/login`, this.state)
     .then(response => {
       console.log(response)
       console.log(postLogin)
@@ -43,7 +42,7 @@ class Login extends React.Component {
     }
 
     logged = () => {
-      this.componentDidMount()
+      this.postLogin()
         this.props.logged()
     }
 
