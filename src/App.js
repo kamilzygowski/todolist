@@ -41,19 +41,6 @@ class App extends React.Component {
   }
   }
 
-  toggleListView = () => {
-    if(this.state.viewList === false){
-    this.setState({
-        viewList: true,
-    });
-    
-} else {
-    this.setState({
-        viewList: false,
-    });  
-}
-}
-
 
   render() {
     const { loginView, loggedIn, viewList } = this.state;
@@ -62,7 +49,6 @@ class App extends React.Component {
         {loginView && !loggedIn && <Login toggle={this.toggleLoginAndRegister} logged={this.logIn} />}
         {!loginView && !loggedIn && <Register toggle={this.toggleLoginAndRegister} />}
         {loggedIn && <ToDo logged={this.logIn} toggleListView={this.toggleListView} viewList={this.viewList}/>}
-        {viewList && <ListView toggleListView={this.toggleListView}/>}
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faAssistiveListeningSystems, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import './ToDo.css';
 import ListView from "../ListView/ListView";
 import axios from "axios";
@@ -12,6 +12,8 @@ class ToDo extends React.Component {
         
         this.state = {
             lists: [],
+            viewList: false,
+            indexOfList: 0,
         }
     }
 
@@ -20,12 +22,9 @@ class ToDo extends React.Component {
         this.props.logged();
     }
 
-    toggleListView = () => {
-        this.props.toggleListView();
-    }
 
     componentDidMount() {
-        axios.get('https://recruitment.ultimate.systems/to-do-lists', {
+        axios.get('http://localhost:8000/to-do-lists', {
             headers: {
               'Authorization': 'Bearer siema'
             }
@@ -38,12 +37,47 @@ class ToDo extends React.Component {
             console.log(error)
         })
     }
+
+    getKeyOfList = (e) => {
+        if (e !== undefined){
+        this.setState({
+            indexOfList: e.target.getAttribute('index')
+        });      
+        console.log(e.target)
+    }
+
+    }
+
+        
+
+    toggleListView = () => {
+        if(this.state.viewList === false){
+        this.setState({
+            viewList: true,
+        });
+        
+        
+    } else {
+        this.setState({
+            viewList: false,
+        });  
+
+    }
+    }
+
+    listItemOnClick = () => {
+        this.getKeyOfList()  
+            this.toggleListView()          
+
+        
+        
+    }
     
     /*const searchList = (rows) => {
         return rows.filter((row) => row.name.toLowerCase().indexOf(q) > -1);
     }*/
     render() {
-      const {lists} = this.state;
+      const {lists, viewList, indexOfList} = this.state;
 
         return(
             <div className="toDo">
@@ -51,18 +85,12 @@ class ToDo extends React.Component {
                 <input placeholder="Search" className="searchInput" />
                 <div className="mainBody">
                     <div className="lists">
-                        {lists.map((list) => (<div className="list" onClick={this.toggleListView}>
+                        {lists.map((list) => (<div className="list" onClick={this.listItemOnClick} onClickCapture={() => this.setState({indexOfList: list.id})} key={list.id} index={list.id}  >
                             <h3>{list.name}</h3>
                             <p> created today</p>
                             <p> {list.task.length} completed/{list.task.length} all</p>
                         </div>))}
-
-                        <div className="list" onClick={this.toggleListView}>
-                            <h3>xx</h3>
-                            <p> created today</p>
-                            <p> xx completed/xx all</p>
-                        </div>
-                        
+                        {viewList && <ListView toggleListView={this.toggleListView} index={indexOfList} />}
                     </div>
                 </div>
             </div>
