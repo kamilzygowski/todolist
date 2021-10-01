@@ -10,6 +10,14 @@ class ListView extends React.Component{
         this.state = {
             lists: [],
             index: 0,
+            changeListName: "",
+            newList:{},
+            newTask:{
+                id: 5,
+                name:"",
+                isDone: false,
+            },
+            postAfterGet: false,
         }
     }
 
@@ -25,7 +33,7 @@ class ListView extends React.Component{
             {
                 
             //console.log(this.props.index)
-            //console.log(response)
+            console.log(response)
             this.setState({lists: response.data})
             //console.log("lists name ",  this.state.lists[0].name)
         })
@@ -34,13 +42,51 @@ class ListView extends React.Component{
         })
     }
 
+    addTask = () => {
+        axios.get('http://localhost:8000/to-do-lists')
+        .then(response =>
+            {
+                this.setState({
+                    newList: response.data[this.props.index -1],
+                })
+                console.log(response.data[this.props.index -1])
+            })
+        .then(response =>
+            {
+           this.setState({
+               newTask:{
+                ...this.state.newTask,
+                   id: this.state.newList.task.length +1,
+               }
+           })
+           this.state.newList.task.push(this.state.newTask)
+            console.log('xd = ' , this.state.newList)
+            this.setState({
+                postAfterGet:true,
+            })
+        })
+        .catch(error => {
+            console.log(error)
+        })
+
+        setTimeout(()=> {
+            axios.post('http://localhost:8000/to-do-lists', this.state.newList)
+            .then(response => {
+                console.log(response)
+            })
+        }, 2000)
+      
+    }
+
     toggleListView = () => {
         this.props.toggleListView();
     }
 
     
     render(){
-        const { lists } = this.state
+        
+        const { lists, changeListName } = this.state
+        //console.log(changeListName)
         if(this.state.lists === undefined) return <p> Loading...</p>
         return(
             <div className="listView">
@@ -48,7 +94,7 @@ class ListView extends React.Component{
                 {lists.length ?
                 lists.filter(list => list.id===this.props.index).map(list =>
                 <span className="listSection">
-                <input type="text" placeholder="List name" defaultValue={list.name} className="listName"></input>
+                <input type="text" placeholder="List name" defaultValue={list.name} onChange={(e) => this.setState({changeListName: e.target.value})} className="listName"></input>
                 </span>) :
                 null
                 }
@@ -72,7 +118,7 @@ class ListView extends React.Component{
                 null
                 }
 
-                <button className="addBtn"> ADD </button>
+                <button className="addBtn" type="submit" onClick={this.addTask}> ADD </button>
                 <button className="cancelAddBtn"> CANCEL </button>
                 <a className="cancelBtn" onClick={this.toggleListView}>CANCEL</a>
                 <button className="saveBtn">SAVE</button>
