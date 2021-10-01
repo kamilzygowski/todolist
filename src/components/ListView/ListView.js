@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import './ListView.css';
 
 class ListView extends React.Component{
@@ -13,6 +13,8 @@ class ListView extends React.Component{
         }
     }
 
+    
+
     componentDidMount(){
         axios.get('http://localhost:8000/to-do-lists', {
             headers: {
@@ -21,10 +23,11 @@ class ListView extends React.Component{
           })
         .then(response => 
             {
-            console.log(this.state.index)
-            console.log(response)
+                
+            //console.log(this.props.index)
+            //console.log(response)
             this.setState({lists: response.data})
-                           //console.log(this.state.lists)
+            //console.log("lists name ",  this.state.lists[0].name)
         })
         .catch(error => {
             console.log(error)
@@ -38,21 +41,33 @@ class ListView extends React.Component{
     
     render(){
         const { lists } = this.state
+        if(this.state.lists === undefined) return <p> Loading...</p>
         return(
             <div className="listView">
-                {
+                {/* Display the name of the last clicked list! */}
+                {lists.length ?
+                lists.filter(list => list.id===this.props.index).map(list =>
                 <span className="listSection">
-                <input type="text" placeholder="List name" defaultValue={this.state.lists[0].id} className="listName"></input>
-                </span>
-                
+                <input type="text" placeholder="List name" defaultValue={list.name} className="listName"></input>
+                </span>) :
+                null
                 }
 
                 {lists.length ?
-                lists.map(list => 
-                <div className="tasks" key={list.id}>
+                lists.filter(list => list.id===this.props.index).map(list =>
+                <div className="tasks">
+                    
+                    {/* These are form inputs and checkmark for every task */}
+                    {list.task.map(tasks => 
+                    <form className="tasksForm">
                     <input type="checkbox" className="checkBox"></input>
-                    <input type="text" placeholder="Task name" className="taskNameInput" defaultValue={list.task.map(tasks => tasks.name)}></input>
+                    <input type="text" placeholder="Task name" className="taskNameInput" defaultValue={tasks.name}></input>
                     <span className="checkmark"></span>
+                    </form>
+                    )}
+                    
+                    
+                    
                 </div>) :
                 null
                 }
@@ -63,5 +78,6 @@ class ListView extends React.Component{
                 <button className="saveBtn">SAVE</button>
             </div>
         );
+           
     }
 }export default ListView;

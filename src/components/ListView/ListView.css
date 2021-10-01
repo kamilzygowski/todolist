@@ -75,6 +75,10 @@
     cursor: pointer;
 }
 
+.tasksForm {
+    margin: 15px 0;
+}
+
 .checkmark {
     position: absolute;
 
