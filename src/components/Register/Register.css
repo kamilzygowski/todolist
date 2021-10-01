@@ -1,14 +1,14 @@
 .register {
     height: 600px;
     width: 450px;
-    background-color: #57606f;
+    background-color: #30336b;
     margin:150px auto;
     display: flex;
     flex-direction: column;
 }
 
 .registerHeader {
-    color:#ffa502;
+    color:#f0932b;
     margin-top:65px;
     margin-bottom: 75px;
 }
@@ -35,7 +35,7 @@
     width: 165px;
     height: 55px;
     margin: 0 auto;
-    background: #ffa502;
+    background: #f0932b;
     margin-top:35px;
     border-radius: 7px;
 }

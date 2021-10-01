@@ -12,7 +12,7 @@
 .list {
     display: flex;
     flex-direction: row;
-    background: #a4b0be;
+    background: #ff7979;
     border-radius: 16px;
     justify-content: space-between;
     padding-left: 5px;
