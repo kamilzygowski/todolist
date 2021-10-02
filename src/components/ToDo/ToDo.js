@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAssistiveListeningSystems, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import './ToDo.css';
@@ -9,7 +9,7 @@ class ToDo extends React.Component {
 
     constructor(props) {
         super(props);
-        
+
         this.state = {
             lists: [],
             viewList: false,
@@ -28,48 +28,47 @@ class ToDo extends React.Component {
     componentDidMount() {
         axios.get('http://localhost:8000/to-do-lists', {
             headers: {
-              'Authorization': 'Bearer siema'
+                'Authorization': 'Bearer siema'
             }
-          })
-        .then(response => {
-            //console.log(response)
-            this.setState({lists: response.data})
         })
-        .catch(error => {
-            //console.log(error)
-        })
+            .then(response => {
+                this.setState({ lists: response.data })
+            })
+            .catch(error => {
+                //console.log(error)
+            })
     }
 
     getKeyOfList = (e) => {
-        if (e !== undefined){
-        this.setState({
-            indexOfList: e.target.getAttribute('index')
-        });      
-        console.log(e.target)
-    }
+        if (e !== undefined) {
+            this.setState({
+                indexOfList: e.target.getAttribute('index')
+            });
+            //console.log(e.target)
+        }
 
     }
 
-        
+
 
     toggleListView = () => {
-        if(this.state.viewList === false){
-        this.setState({
-            viewList: true,
-        });
-        
-        
-    } else {
-        this.setState({
-            viewList: false,
-        });  
+        if (this.state.viewList === false) {
+            this.setState({
+                viewList: true,
+            });
 
-    }
+
+        } else {
+            this.setState({
+                viewList: false,
+            });
+
+        }
     }
 
     listItemOnClick = () => {
-        this.getKeyOfList()  
-        this.toggleListView()          
+        this.getKeyOfList()
+        this.toggleListView()
     }
 
 
@@ -77,31 +76,18 @@ class ToDo extends React.Component {
     componentDidUpdate() {
         this.componentDidMount()
     }
-    
-    /*const searchList = (rows) => {
-        return rows.filter((row) => row.name.toLowerCase().indexOf(q) > -1);
-    }*/
+
+
     render() {
-      const {lists, viewList, indexOfList, renderToDo} = this.state;
-      /*setTimeout(() => {
-        this.componentDidMount()
-      }, 3500)*/
-      if (renderToDo === true){
-        this.componentDidMount()
-        this.setState({
-            renderToDo: false,
-        })
-        console.log("poguś")
-      }
-      
-        
-        return(
+        const { lists, viewList, indexOfList, renderToDo } = this.state;
+
+        return (
             <div className="toDo">
                 <FontAwesomeIcon icon={faSignOutAlt} className="logOut" onClick={this.logged} />
                 <input placeholder="Search" className="searchInput" />
                 <div className="mainBody">
                     <div className="lists">
-                        {lists.map((list) => (<div className="list" onClick={this.listItemOnClick} onClickCapture={() => this.setState({indexOfList: list.id})} key={list.id} index={list.id}  >
+                        {lists.map((list) => (<div className="list" onClick={this.listItemOnClick} onClickCapture={() => this.setState({ indexOfList: list.id })} key={list.id} index={list.id}  >
                             <h3>{list.name}</h3>
                             <p> created today</p>
                             <p> {list.task.length} completed/{list.task.length} all</p>
@@ -111,6 +97,6 @@ class ToDo extends React.Component {
                 </div>
             </div>
         );
- }
+    }
 }
- export default ToDo;
+export default ToDo;

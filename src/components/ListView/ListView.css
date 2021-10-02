@@ -10,7 +10,7 @@
 .listName {
     margin-top: 25px;
     width: inherit;
-    font-size: 18px;
+    font-size: 22px;
     margin-bottom: 20px;
 }
 
@@ -67,6 +67,7 @@
     background: inherit;
     height: 25px;
     color:#fff;
+    font-size: 18px;
 }
 
 .checkBox {
