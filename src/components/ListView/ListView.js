@@ -70,11 +70,16 @@ class ListView extends React.Component{
         })
 
         setTimeout(()=> {
-            axios.post('http://localhost:8000/to-do-lists', this.state.newList)
+            axios.delete('http://localhost:8000/to-do-lists/'+this.props.index)
             .then(response => {
                 console.log(response)
             })
-        }, 2000)
+        }, 500)
+
+        setTimeout(() => {
+            axios.post('http://localhost:8000/to-do-lists' ,this.state.newList)
+            
+        }, 500)
       
     }
 
