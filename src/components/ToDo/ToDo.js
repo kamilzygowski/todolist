@@ -14,6 +14,8 @@ class ToDo extends React.Component {
             lists: [],
             viewList: false,
             indexOfList: 0,
+            renderToDo: false,
+            dataFromChild: "",
         }
     }
 
@@ -30,11 +32,11 @@ class ToDo extends React.Component {
             }
           })
         .then(response => {
-            console.log(response)
+            //console.log(response)
             this.setState({lists: response.data})
         })
         .catch(error => {
-            console.log(error)
+            //console.log(error)
         })
     }
 
@@ -67,18 +69,32 @@ class ToDo extends React.Component {
 
     listItemOnClick = () => {
         this.getKeyOfList()  
-            this.toggleListView()          
+        this.toggleListView()          
+    }
 
-        
-        
+
+
+    componentDidUpdate() {
+        this.componentDidMount()
     }
     
     /*const searchList = (rows) => {
         return rows.filter((row) => row.name.toLowerCase().indexOf(q) > -1);
     }*/
     render() {
-      const {lists, viewList, indexOfList} = this.state;
-
+      const {lists, viewList, indexOfList, renderToDo} = this.state;
+      /*setTimeout(() => {
+        this.componentDidMount()
+      }, 3500)*/
+      if (renderToDo === true){
+        this.componentDidMount()
+        this.setState({
+            renderToDo: false,
+        })
+        console.log("poguś")
+      }
+      
+        
         return(
             <div className="toDo">
                 <FontAwesomeIcon icon={faSignOutAlt} className="logOut" onClick={this.logged} />
@@ -90,7 +106,7 @@ class ToDo extends React.Component {
                             <p> created today</p>
                             <p> {list.task.length} completed/{list.task.length} all</p>
                         </div>))}
-                        {viewList && <ListView toggleListView={this.toggleListView} index={indexOfList} />}
+                        {viewList && <ListView toggleListView={this.toggleListView} index={indexOfList} renderToDo={renderToDo} />}
                     </div>
                 </div>
             </div>

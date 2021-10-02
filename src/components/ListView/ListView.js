@@ -17,9 +17,10 @@ class ListView extends React.Component{
                 name:"",
                 isDone: false,
             },
-            postAfterGet: false,
+           
         }
     }
+    
 
     
 
@@ -62,7 +63,7 @@ class ListView extends React.Component{
            this.state.newList.task.push(this.state.newTask)
             console.log('xd = ' , this.state.newList)
             this.setState({
-                postAfterGet:true,
+                renderToDo:true,
             })
         })
         .catch(error => {
@@ -85,16 +86,53 @@ class ListView extends React.Component{
       
     }
 
+    saveChanges = () => {
+        /* Get the list to save it in newList state, then change it's list name to given in input */
+        axios.get('http://localhost:8000/to-do-lists')
+        .then(response =>
+            {
+                this.setState({
+                    newList: response.data[this.props.index -1],
+                })
+                console.log(response.data[this.props.index -1])
+            })
+        .then(response =>
+            {
+           console.log(response)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+        setTimeout(() => {
+            console.log(this.state.changeListName)
+            axios.put('http://localhost:8000/to-do-lists/'+this.props.index ,{
+                ...this.state.newList,
+                name: this.state.changeListName,
+               task:[
+                   ...this.state.newList.task,
+                   
+               ]
+        }).then(response => {
+            console.log(response)
+            this.setState({
+                renderToDo:true,
+            })
+        })
+            this.componentDidMount()
+        }, 500)
+      
+    }
+
     toggleListView = () => {
         this.props.toggleListView();
     }
+
 
     
     render(){
         
         const { lists, changeListName } = this.state
         //console.log(changeListName)
-        if(this.state.lists === undefined) return <p> Loading...</p>
         return(
             <div className="listView">
                 {/* Display the name of the last clicked list! */}
@@ -128,7 +166,7 @@ class ListView extends React.Component{
                 <button className="addBtn" type="submit" onClick={this.addTask}> ADD </button>
                 <button className="cancelAddBtn"> CANCEL </button>
                 <a className="cancelBtn" onClick={this.toggleListView}>CANCEL</a>
-                <button className="saveBtn">SAVE</button>
+                <button className="saveBtn" type="submit" onClick={this.saveChanges}>SAVE</button>
             </div>
         );
            
