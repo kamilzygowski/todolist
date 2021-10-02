@@ -69,16 +69,18 @@ class ListView extends React.Component{
             console.log(error)
         })
 
-        setTimeout(()=> {
-            axios.delete('http://localhost:8000/to-do-lists/'+this.props.index)
-            .then(response => {
-                console.log(response)
-            })
-        }, 500)
-
+        /* Build new task in a certain list */
         setTimeout(() => {
-            axios.post('http://localhost:8000/to-do-lists' ,this.state.newList)
-            
+            axios.put('http://localhost:8000/to-do-lists/'+this.props.index ,{
+                ...this.state.newList,
+               task:[
+                   ...this.state.newList.task,
+                   
+               ]
+        }).then(response => {
+            console.log(response)
+        })
+            this.componentDidMount()
         }, 500)
       
     }
@@ -106,11 +108,11 @@ class ListView extends React.Component{
 
                 {lists.length ?
                 lists.filter(list => list.id===this.props.index).map(list =>
-                <div className="tasks">
+                <div className="tasks" key={list.key}>
                     
                     {/* These are form inputs and checkmark for every task */}
                     {list.task.map(tasks => 
-                    <form className="tasksForm">
+                    <form className="tasksForm" key={list.key}>
                     <input type="checkbox" className="checkBox"></input>
                     <input type="text" placeholder="Task name" className="taskNameInput" defaultValue={tasks.name}></input>
                     <span className="checkmark"></span>
