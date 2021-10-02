@@ -17,7 +17,8 @@ class ListView extends React.Component{
                 name:"",
                 isDone: false,
             },
-           
+           changeTaskName: "",
+           changeTaskId: "",
         }
     }
     
@@ -34,7 +35,7 @@ class ListView extends React.Component{
             {
                 
             //console.log(this.props.index)
-            console.log(response)
+            //console.log("on Mount response: ", response)
             this.setState({lists: response.data})
             //console.log("lists name ",  this.state.lists[0].name)
         })
@@ -50,7 +51,7 @@ class ListView extends React.Component{
                 this.setState({
                     newList: response.data[this.props.index -1],
                 })
-                console.log(response.data[this.props.index -1])
+                //console.log(response.data[this.props.index -1])
             })
         .then(response =>
             {
@@ -61,10 +62,8 @@ class ListView extends React.Component{
                }
            })
            this.state.newList.task.push(this.state.newTask)
-            console.log('xd = ' , this.state.newList)
-            this.setState({
-                renderToDo:true,
-            })
+            //console.log('xd = ' , this.state.newList)
+           
         })
         .catch(error => {
             console.log(error)
@@ -76,7 +75,6 @@ class ListView extends React.Component{
                 ...this.state.newList,
                task:[
                    ...this.state.newList.task,
-                   
                ]
         }).then(response => {
             console.log(response)
@@ -94,29 +92,39 @@ class ListView extends React.Component{
                 this.setState({
                     newList: response.data[this.props.index -1],
                 })
-                console.log(response.data[this.props.index -1])
+                //console.log(response.data[this.props.index -1])
             })
         .then(response =>
             {
-           console.log(response)
+           //console.log("here will be code: ", this.state.newList.task[this.state.changeTaskId - 1])
+           //console.log("here is id: ", this.state.changeTaskId)
+           /* IMPORTANT I have to find out how to setState of IN ARRAY thimg like below without mutating this state */
+           if (this.state.changeTaskName !== "" && this.state.changeTaskId !==""){
+           this.state.newList.task[this.state.changeTaskId - 1].name = this.state.changeTaskName
+           }
         })
+        
         .catch(error => {
             console.log(error)
         })
+        
         setTimeout(() => {
+            if (this.state.changeListName === ""){
+                this.setState({
+                    changeListName: this.state.newList.name,
+                })
+            }
+
             console.log(this.state.changeListName)
             axios.put('http://localhost:8000/to-do-lists/'+this.props.index ,{
                 ...this.state.newList,
                 name: this.state.changeListName,
                task:[
-                   ...this.state.newList.task,
-                   
+                   ...this.state.newList.task
                ]
         }).then(response => {
             console.log(response)
-            this.setState({
-                renderToDo:true,
-            })
+            
         })
             this.componentDidMount()
         }, 500)
@@ -131,7 +139,7 @@ class ListView extends React.Component{
     
     render(){
         
-        const { lists, changeListName } = this.state
+        const { lists } = this.state
         //console.log(changeListName)
         return(
             <div className="listView">
@@ -152,7 +160,11 @@ class ListView extends React.Component{
                     {list.task.map(tasks => 
                     <form className="tasksForm" key={list.key}>
                     <input type="checkbox" className="checkBox"></input>
-                    <input type="text" placeholder="Task name" className="taskNameInput" defaultValue={tasks.name}></input>
+                    <input type="text" placeholder="Task name" className="taskNameInput" id={tasks.id} onChange={(e) => this.setState({
+                        changeTaskName: e.target.value
+                         })} onClick={(e) => this.setState({
+                            changeTaskId: e.target.id
+                         })} defaultValue={tasks.name}></input>
                     <span className="checkmark"></span>
                     </form>
                     )}
