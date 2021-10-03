@@ -68,6 +68,8 @@
     height: 25px;
     color:#fff;
     font-size: 18px;
+    /*text-align: center;*/
+    margin-left: 25px;
 }
 
 .checkBox {
@@ -122,8 +124,9 @@
 .cancelAddBtn {
     position: relative;
     top:25px;
-    width: 95px;
-    height: 40px;
+    font-size: 16px;
+    width: 115px;
+    height: 45px;
     right: -150px;
     background: #ee5253;
     border-radius: 10px;
@@ -138,15 +141,33 @@
 .addBtn {
     position: relative;
     top:25px;
-    width: 95px;
-    height: 40px;
+    width: 115px;
+    height: 45px;
     background: #ffa502;
     border-radius: 10px;
     border:none;
     right: -135px;
+    font-size: 16px;
 }
 
 .addBtn:hover {
     background: #cd6133;
     color:#fff;
+}
+
+.deleteTask {
+    padding-left: 15px;
+    font-size: 22px;
+    color:red;
+    margin-bottom: 5PX;
+    
+}
+
+.deleteTask:hover {
+    opacity:0.2;
+}
+
+.coverSpan {
+    width:100%;
+    height: 100%;
 }

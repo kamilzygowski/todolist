@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import './ListView.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 class ListView extends React.Component {
 
@@ -124,8 +126,31 @@ class ListView extends React.Component {
 
     }
 
+    deleteTask = (e) => {
+        axios.get('http://localhost:8000/to-do-lists')
+        .then(response => {
+            console.log(e.target.id)
+            console.log(response)
+            this.setState({
+                newList: response.data[this.props.index - 1],
+            })
+        })
+
+        axios.delete('http://localhost:8000/to-do-lists/' + this.props.index +"/" +  e.target.id)
+        .then(response => {
+            console.log(response)
+            this.componentDidMount()
+        })
+
+
+    }
+
     toggleListView = () => {
-        this.props.toggleListView();
+        this.props.toggleListView()
+    }
+
+    deleteList = () => {
+        this.props.deleteList()
     }
 
 
@@ -160,6 +185,9 @@ class ListView extends React.Component {
                                         changeTaskId: e.target.id
                                     })} defaultValue={tasks.name}></input>
                                     <span className="checkmark"></span>
+                                    <span className="coverSpan">
+                                    <FontAwesomeIcon icon={faTimes} className="deleteTask" id={tasks.id} onClick={this.deleteTask}/>
+                                    </span>
                                 </form>
                             )}
 
@@ -170,8 +198,8 @@ class ListView extends React.Component {
                 }
 
                 {/* Usage buttons on the display view*/}
-                <button className="addBtn" type="submit" onClick={this.addTask}> ADD </button>
-                <button className="cancelAddBtn"> CANCEL </button>
+                <button className="addBtn" type="submit" onClick={this.addTask}> ADD TASK </button>
+                <button className="cancelAddBtn" onClick={this.deleteList}> DELETE LIST </button>
                 <a className="cancelBtn" onClick={this.toggleListView}>CANCEL</a>
                 <button className="saveBtn" type="submit" onClick={this.saveChanges}>SAVE</button>
             </div>

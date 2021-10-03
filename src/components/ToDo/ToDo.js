@@ -22,6 +22,7 @@ class ToDo extends React.Component {
                 task:[]
             },
             searchingPhrase: "",
+            placeholderList:{},
         }
     }
 
@@ -92,18 +93,16 @@ class ToDo extends React.Component {
         /* First get the info about lists to write it down in a var */
         axios.get('http://localhost:8000/to-do-lists')
         .then(response => {
-            console.log(response)
             /* Write down all lists in lists var */
             this.setState({ lists: response.data })
         })
-        .then(response => {
+        .then(() => {
             this.setState({
                 newList: {
                     ...this.state.newList,
                     id: this.state.lists.length +1,
                 }
             })
-            console.log(this.state.newList) // zajebiscie dziala
         })
 
 
@@ -111,7 +110,24 @@ class ToDo extends React.Component {
             ...this.state.newList
         })
         .then(response => {
-            console.log(response)
+        })
+    }
+
+    deleteList = (e) => {
+        axios.get('http://localhost:8000/to-do-lists')
+        .then(response => {
+            this.setState({
+                placeholderList: response.data[this.props.index - 1],
+            })
+        })
+
+        axios.delete('http://localhost:8000/to-do-lists/' + this.state.indexOfList)
+        .then(response => {
+            this.componentDidMount()
+        })
+
+        this.setState({
+            viewList:false,
         })
     }
 
@@ -139,7 +155,7 @@ class ToDo extends React.Component {
                                 <p>/{list.task.length} all</p>
                             </span>
                         </div>))}
-                        {viewList && <ListView toggleListView={this.toggleListView} index={indexOfList} renderToDo={renderToDo} />}
+                        {viewList && <ListView toggleListView={this.toggleListView} index={indexOfList} renderToDo={renderToDo} deleteList={this.deleteList}/>}
                     </div>
                 </div>
                 <span className="addNewList">
