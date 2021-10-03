@@ -113,7 +113,7 @@ class ListView extends React.Component {
                 ...this.state.newList,
                 name: this.state.changeListName,
                 task: [
-                    ...this.state.newList.task
+                    ...this.state.newList.task,
                 ]
             }).then(response => {
                 console.log(response)
@@ -142,7 +142,7 @@ class ListView extends React.Component {
                         <span className="listSection">
                             <input type="text" placeholder="List name" defaultValue={list.name} onChange={(e) => this.setState({ changeListName: e.target.value })} className="listName"></input>
                         </span>) :
-                    null
+                    ""
                 }
 
                 {/* Sort and filter the list that will be displayed*/}
@@ -166,7 +166,7 @@ class ListView extends React.Component {
 
 
                         </div>) :
-                    null
+                    ""
                 }
 
                 {/* Usage buttons on the display view*/}
