@@ -42,3 +42,35 @@
 .logOut:hover {
     color:#fff;
 }
+
+.addNewList {
+    position: absolute;
+    color:#fff;
+    
+    right:45px;
+    bottom: 45px;
+}
+
+.plusList:hover{
+    color:darkgreen;
+}
+
+.plusList {
+    font-size: 66px;
+}
+
+.plusListDescription {
+    font-size:22px;
+}
+
+.tasksDone {
+    display: flex;
+    flex-direction: row;
+    font-size:18px;
+}
+
+.doneIcon {
+    color:green;
+    margin: 18px 5px;
+    font-size: 24px;
+}
