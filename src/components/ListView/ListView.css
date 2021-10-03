@@ -3,7 +3,7 @@
     height: 80%;
     top:10%;
     left:28%;
-    background: #ef5777;
+    background: #574b90;
     position:absolute;
     border-radius: 25px;
     border:1px #485460 solid;
@@ -17,7 +17,7 @@
 }
 
 .saveBtn {
-    background-color:#575fcf;
+    background-color:#f8a5c2;
     bottom: 25px;
     right: 25px;
     position: absolute;
@@ -26,7 +26,6 @@
     height: 45px;
     border:none;
     border-radius: 10px;
-    color:#fff;
 }
 
 .saveBtn:hover {
@@ -130,7 +129,7 @@
     width: 115px;
     height: 45px;
     right: -150px;
-    background: #ee5253;
+    background: #eb2f06;
     border-radius: 10px;
     border:none;
 }
@@ -145,7 +144,7 @@
     top:25px;
     width: 115px;
     height: 45px;
-    background: #575fcf;
+    background: #f8a5c2;
     border-radius: 10px;
     border:none;
     right: -135px;
@@ -160,7 +159,7 @@
 .deleteTask {
     padding-left: 15px;
     font-size: 22px;
-    color:red;
+    color:#eb2f06;
     margin-bottom: 5PX;
     
 }
