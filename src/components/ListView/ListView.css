@@ -1,21 +1,23 @@
 .listView {
-    width:40%;
+    width:760px;
     height: 80%;
     top:10%;
-    left: 30%;
-    background: #6ab04c;
+    left:28%;
+    background: #ef5777;
     position:absolute;
+    border-radius: 25px;
+    border:1px #485460 solid;
 }
 
 .listName {
-    margin-top: 25px;
+    margin-top: 35px;
     width: inherit;
     font-size: 22px;
     margin-bottom: 20px;
 }
 
 .saveBtn {
-    background-color:#ffa502;
+    background-color:#575fcf;
     bottom: 25px;
     right: 25px;
     position: absolute;
@@ -45,7 +47,7 @@
 
 .listSection {
     padding-bottom: 25px;
-    border-bottom:3px solid #ffa502;
+    border-bottom:3px solid #0fbcf9;
     
     top:25px;
     left:42px;
@@ -63,7 +65,7 @@
 .taskNameInput {
     width: 80%;
     border:none;
-    border-bottom: 2px solid #ffa502;
+    border-bottom: 2px solid #0fbcf9;
     background: inherit;
     height: 25px;
     color:#fff;
@@ -143,7 +145,7 @@
     top:25px;
     width: 115px;
     height: 45px;
-    background: #ffa502;
+    background: #575fcf;
     border-radius: 10px;
     border:none;
     right: -135px;

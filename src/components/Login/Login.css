@@ -11,6 +11,7 @@
     color:#f0932b;
     margin-top:35px;
     margin-bottom: 75px;
+    font-size:38px;
 }
 
 .username, .password {
@@ -31,6 +32,7 @@
     background: #f0932b;
     margin-top:35px;
     border-radius: 7px;
+    font-size: 22px;
 }
 
 .smallOr {
@@ -40,9 +42,10 @@
 
 .createAccount {
     color:#f0932b;
-    font-size:22px;
+    font-size:24px;
     margin-top:35px;
     cursor: pointer;
+    
 }
 
 .createAccount:hover {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAssistiveListeningSystems, faSignOutAlt, faPlus, faCheckSquare } from '@fortawesome/free-solid-svg-icons';
+import { faAssistiveListeningSystems, faSignOutAlt, faPlus, faCheckSquare, faThumbtack } from '@fortawesome/free-solid-svg-icons';
 import './ToDo.css';
 import ListView from "../ListView/ListView";
 import axios from "axios";
@@ -137,7 +137,7 @@ class ToDo extends React.Component {
         return (
             <div className="toDo">
                 <FontAwesomeIcon icon={faSignOutAlt} className="logOut" onClick={this.logged} />
-                <input placeholder="Search" className="searchInput" onChange={(e) => this.setState({ searchingPhrase: e.target.value.toLowerCase() })}/>
+                <input placeholder="Search for lists!" className="searchInput" onChange={(e) => this.setState({ searchingPhrase: e.target.value.toLowerCase() })}/>
                 <div className="mainBody">
                     <div className="lists">
                         {lists.filter((list) => {
@@ -146,7 +146,10 @@ class ToDo extends React.Component {
                             } else if (list.name.toLowerCase().includes(this.state.searchingPhrase.toLowerCase())) {
                                 return list.name
                             }
-                        }).map((list, search) => (<div className="list" onClick={this.listItemOnClick} onClickCapture={() => this.setState({ indexOfList: list.id })} key={list.id} index={list.id}  >
+                        }).map((list, search) => (
+                        <span className="pinSpan">
+                        <FontAwesomeIcon icon={faThumbtack} className="pinIcon"/>
+                        <div className="list" onClick={this.listItemOnClick} onClickCapture={() => this.setState({ indexOfList: list.id })} key={list.id} index={list.id}  >
                             <h3>{list.name}</h3>
                             <p> created today</p>
                             <span className="tasksDone">
@@ -154,7 +157,10 @@ class ToDo extends React.Component {
                                 <FontAwesomeIcon icon={faCheckSquare} className="doneIcon"/>
                                 <p>/{list.task.length} all</p>
                             </span>
-                        </div>))}
+                        </div>
+                        <FontAwesomeIcon icon={faThumbtack}  className="pinIcon"/>
+                        </span>
+                        ))}
                         {viewList && <ListView toggleListView={this.toggleListView} index={indexOfList} renderToDo={renderToDo} deleteList={this.deleteList}/>}
                     </div>
                 </div>

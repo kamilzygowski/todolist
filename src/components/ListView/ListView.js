@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React from "react";
 import './ListView.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -34,10 +34,7 @@ class ListView extends React.Component {
             }
         })
             .then(response => {
-                this.setState({ lists: response.data })   
-            })
-            .catch(error => {
-                console.log(error)
+                this.setState({ lists: response.data })
             })
     }
 
@@ -61,9 +58,6 @@ class ListView extends React.Component {
                 /* Add an array object to variable that represents state of list on server */
                 this.state.newList.task.push(this.state.newTask)
             })
-            .catch(error => {
-                console.log(error)
-            })
 
         /* Build new task in a certain list using cloned list piece */
         setTimeout(() => {
@@ -72,11 +66,10 @@ class ListView extends React.Component {
                 task: [
                     ...this.state.newList.task,
                 ]
-            }).then(response => {
-                //console.log(response)
+            }).then(() => {
+                /* Refresh the ViewList to see the changes on server */
+                this.componentDidMount()
             })
-            /* Refresh the ViewList to see the changes on server */
-            this.componentDidMount()
         }, 500)
 
     }
@@ -88,20 +81,12 @@ class ListView extends React.Component {
                 this.setState({
                     newList: response.data[this.props.index - 1],
                 })
-                //console.log(response.data[this.props.index -1])
             })
-            .then(response => {
-                //console.log("here will be code: ", this.state.newList.task[this.state.changeTaskId - 1])
-                //console.log("here is id: ", this.state.changeTaskId)
-
+            .then(() => {
                 /* IMPORTANT I have to find out how to setState of IN ARRAY thimg like below without mutating this state */
                 if (this.state.changeTaskName !== "" && this.state.changeTaskId !== "") {
                     this.state.newList.task[this.state.changeTaskId - 1].name = this.state.changeTaskName
                 }
-            })
-
-            .catch(error => {
-                console.log(error)
             })
 
         setTimeout(() => {
@@ -117,32 +102,32 @@ class ListView extends React.Component {
                 task: [
                     ...this.state.newList.task,
                 ]
-            }).then(response => {
-                console.log(response)
-
+            }).then(() => {
+                this.componentDidMount()
             })
-            this.componentDidMount()
         }, 500)
 
     }
 
     deleteTask = (e) => {
         axios.get('http://localhost:8000/to-do-lists')
-        .then(response => {
-            console.log(e.target.id)
-            console.log(response)
-            this.setState({
-                newList: response.data[this.props.index - 1],
+            .then(response => {
+                this.setState({
+                    newList: response.data[this.props.index - 1],
+                })
             })
-        })
+            .then(() => {
+                this.state.newList.task.splice(e.target.id - 1, 1)
+            })
 
-        axios.delete('http://localhost:8000/to-do-lists/' + this.props.index +"/" +  e.target.id)
-        .then(response => {
-            console.log(response)
-            this.componentDidMount()
-        })
-
-
+        setTimeout(() => {
+            axios.put('http://localhost:8000/to-do-lists/' + this.props.index,
+                this.state.newList
+            )
+                .then(() => {
+                    this.componentDidMount()
+                })
+        }, 500)
     }
 
     toggleListView = () => {
@@ -156,9 +141,8 @@ class ListView extends React.Component {
 
 
     render() {
-
         const { lists } = this.state
-        //console.log(changeListName)
+
         return (
             <div className="listView">
                 {/* Display the name of the last clicked list! */}
@@ -186,17 +170,13 @@ class ListView extends React.Component {
                                     })} defaultValue={tasks.name}></input>
                                     <span className="checkmark"></span>
                                     <span className="coverSpan">
-                                    <FontAwesomeIcon icon={faTimes} className="deleteTask" id={tasks.id} onClick={this.deleteTask}/>
+                                        <FontAwesomeIcon icon={faTimes} className="deleteTask" id={tasks.id} onClick={this.deleteTask} />
                                     </span>
                                 </form>
                             )}
-
-
-
                         </div>) :
                     ""
                 }
-
                 {/* Usage buttons on the display view*/}
                 <button className="addBtn" type="submit" onClick={this.addTask}> ADD TASK </button>
                 <button className="cancelAddBtn" onClick={this.deleteList}> DELETE LIST </button>
@@ -204,6 +184,5 @@ class ListView extends React.Component {
                 <button className="saveBtn" type="submit" onClick={this.saveChanges}>SAVE</button>
             </div>
         );
-
     }
 } export default ListView;
