@@ -89,3 +89,22 @@
     margin: auto 25px;
     font-size: 32px;
 }
+
+@media only screen and (max-width: 768px) {
+   .pinIcon{
+       display:none;
+   }
+
+   .lists{
+       width:100%;
+       
+   }
+
+   .list{
+    height: 80px;
+   }
+
+   .searchInput{
+       width:80%;
+   }
+  }

@@ -173,3 +173,30 @@
     height: 100%;
     z-index: 3;
 }
+
+@media only screen and (max-width: 768px) {
+    .listView{
+        width: 100%;
+        top:0;
+        left:0;
+        margin:auto 0;
+    }
+
+    .tasksForm{
+
+    }
+
+    .taskNameInput{
+        width:60%;
+    }
+
+    .addBtn{
+        margin-top: 40px;
+        right:-10px;
+    }
+
+    .cancelAddBtn{
+        margin-top: 40px;
+        right:-50px;
+    }
+   }

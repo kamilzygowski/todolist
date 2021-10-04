@@ -71,3 +71,9 @@
         width:165px;
       }
 }
+
+@media only screen and (max-width: 768px) {
+    .window{
+        background:#1B1464;
+    }
+   }
