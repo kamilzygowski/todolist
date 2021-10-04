@@ -24,7 +24,6 @@ class ListView extends React.Component {
             },
             changeTaskName: "",
             changeTaskId: "",
-            arrayFirstItem:0,
         }
     }
 
@@ -143,9 +142,6 @@ class ListView extends React.Component {
         this.props.deleteList()
     }
 
-
-
-
     render() {
         const { lists } = this.state
         return (
@@ -168,7 +164,7 @@ class ListView extends React.Component {
                             {list.task.map(tasks =>
                                 <form className="tasksForm" key={list.key}>
                                     <input type="checkbox" className="checkBox"></input>
-                                    <input type="text" placeholder="Task name" className="taskNameInput" id={tasks.id} onChange={(e) => this.setState({
+                                    <input type="text" placeholder="Task name" className="taskNameInput" key={list.id} id={tasks.id} onChange={(e) => this.setState({
                                         changeTaskName: e.target.value
                                     })} onClick={(e) => this.setState({
                                         changeTaskId: e.target.id
