@@ -1,8 +1,11 @@
+
 import axios from "axios";
 import React from "react";
 import './ListView.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+
+const {REACT_APP_DB_HOST} = process.env;
 
 class ListView extends React.Component {
 
@@ -21,14 +24,13 @@ class ListView extends React.Component {
             },
             changeTaskName: "",
             changeTaskId: "",
+            arrayFirstItem:0,
         }
     }
 
 
-
-
     componentDidMount() {
-        axios.get('http://localhost:8000/to-do-lists', {
+        axios.get(`${REACT_APP_DB_HOST}to-do-lists/`, {
             headers: {
                 'Authorization': 'Bearer siema'
             }
@@ -39,7 +41,7 @@ class ListView extends React.Component {
     }
 
     addTask = () => {
-        axios.get('http://localhost:8000/to-do-lists')
+        axios.get(`${REACT_APP_DB_HOST}to-do-lists/`)
             .then(response => {
                 /* Find the list and get it to the this.state variable */
                 this.setState({
@@ -58,25 +60,23 @@ class ListView extends React.Component {
                 /* Add an array object to variable that represents state of list on server */
                 this.state.newList.task.push(this.state.newTask)
             })
-
-        /* Build new task in a certain list using cloned list piece */
-        setTimeout(() => {
-            axios.put('http://localhost:8000/to-do-lists/' + this.props.index, {
-                ...this.state.newList,
-                task: [
-                    ...this.state.newList.task,
-                ]
-            }).then(() => {
-                /* Refresh the ViewList to see the changes on server */
-                this.componentDidMount()
+            .then(() => {
+                        /* Build new task in a certain list using cloned list piece */
+                axios.put(`${REACT_APP_DB_HOST}to-do-lists/${this.props.index}`, {
+                    ...this.state.newList,
+                    task: [
+                        ...this.state.newList.task,
+                    ]
+                }).then(() => {
+                    /* Refresh the ViewList to see the changes on server */
+                    this.componentDidMount()
+                })
             })
-        }, 500)
-
     }
 
     saveChanges = () => {
         /* Get the list to save it in newList state, then change it's list name to given in input */
-        axios.get('http://localhost:8000/to-do-lists')
+        axios.get(`${REACT_APP_DB_HOST}to-do-lists/`)
             .then(response => {
                 this.setState({
                     newList: response.data[this.props.index - 1],
@@ -87,47 +87,52 @@ class ListView extends React.Component {
                 if (this.state.changeTaskName !== "" && this.state.changeTaskId !== "") {
                     this.state.newList.task[this.state.changeTaskId - 1].name = this.state.changeTaskName
                 }
-            })
 
-        setTimeout(() => {
-            if (this.state.changeListName === "") {
-                this.setState({
-                    changeListName: this.state.newList.name,
+                if(this.state.changeListName !==""){
+                    this.state.newList.name = this.state.changeListName
+                }
+            })
+            .then(() => {
+                axios.put(`${REACT_APP_DB_HOST}to-do-lists/${this.props.index}`, {
+                    ...this.state.newList,
+                    task: [
+                        ...this.state.newList.task,
+                    ]
+                }).then(() => {
+                    this.componentDidMount()
                 })
-            }
-
-            axios.put('http://localhost:8000/to-do-lists/' + this.props.index, {
-                ...this.state.newList,
-                name: this.state.changeListName,
-                task: [
-                    ...this.state.newList.task,
-                ]
-            }).then(() => {
-                this.componentDidMount()
             })
-        }, 500)
-
     }
 
     deleteTask = (e) => {
-        axios.get('http://localhost:8000/to-do-lists')
+        axios.get(`${REACT_APP_DB_HOST}to-do-lists/`)
             .then(response => {
                 this.setState({
                     newList: response.data[this.props.index - 1],
                 })
             })
             .then(() => {
-                this.state.newList.task.splice(e.target.id - 1, 1)
-            })
+                console.log('xd: ' + e.target.id)
+                //this.state.newList.task.splice(e.target.id, 1)
 
-        setTimeout(() => {
-            axios.put('http://localhost:8000/to-do-lists/' + this.props.index,
+                /*for (var i = 0; i < this.state.newList.task.length; i++) {
+                    var obj = this.state.newList.task[i];
+                
+                    if (e.target.id.indexOf(obj.id) !== -1) {
+                        this.state.newList.task.splice(i, 1);
+                        i--;
+                    }
+                }*/ 
+
+                axios.put(`${REACT_APP_DB_HOST}to-do-lists/${this.props.index}`,
                 this.state.newList
             )
                 .then(() => {
                     this.componentDidMount()
+                    this.render()
                 })
-        }, 500)
+            })
+
     }
 
     toggleListView = () => {
@@ -140,9 +145,9 @@ class ListView extends React.Component {
 
 
 
+
     render() {
         const { lists } = this.state
-
         return (
             <div className="listView">
                 {/* Display the name of the last clicked list! */}
@@ -170,7 +175,7 @@ class ListView extends React.Component {
                                     })} defaultValue={tasks.name}></input>
                                     <span className="checkmark"></span>
                                     <span className="coverSpan">
-                                        <FontAwesomeIcon icon={faTimes} className="deleteTask" id={tasks.id} onClick={this.deleteTask} />
+                                        <FontAwesomeIcon icon={faTimes} className="deleteTask" id={tasks.id-1} onClick={this.deleteTask} />
                                     </span>
                                 </form>
                             )}
