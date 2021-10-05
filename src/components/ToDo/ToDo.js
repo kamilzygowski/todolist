@@ -149,8 +149,8 @@ class ToDo extends React.Component {
                             <span className="pinSpan">
                                 <FontAwesomeIcon icon={faThumbtack} className="pinIcon" />
                                 <div className="list" key={list.id} onClick={this.listItemOnClick} onClickCapture={() => this.setState({ indexOfList: list.id })} key={list.id} index={list.id}  >
-                                    <h3>{list.name}</h3>
-                                    <p> created today</p>
+                                    <h3 className="listName">{list.name}</h3>
+                                    <p className="createDate"> created today</p>
                                     <span className="tasksDone">
                                         <p> Tasks: {list.task.length}</p>
                                         <FontAwesomeIcon icon={faCheckSquare} className="doneIcon" />

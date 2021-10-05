@@ -97,14 +97,52 @@
 
    .lists{
        width:100%;
+       display: flex;
        
    }
 
    .list{
-    height: 80px;
+    height: 100%;
+    font-size: 14px;
+    padding-top: 0;
+    
+   }
+
+   .listName{
+       font-size: 16px;
+       margin:auto auto;
+       margin-left: -30px;
+       
+       justify-content: space-between;
+   }
+
+   .tasksDone{
+       font-size: 14px;
+       margin:auto auto;
+       flex-wrap: wrap;
+       margin-left: 25px;
+       font-weight: 400;
    }
 
    .searchInput{
        width:80%;
    }
+
+   .addNewList{
+       position: relative;
+       margin:25px auto;
+       bottom:0;
+       right:0;
+   }
+
+   .createDate{
+       display: none;
+       
+       justify-content: space-between;
+   }
+
+   .doneIcon {
+       font-size: 14px;
+   }
+
   }
