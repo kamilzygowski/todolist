@@ -19,6 +19,7 @@
     margin:12px auto;
     height: 30px;
     font-size: 17px;
+    cursor: pointer;
 }
 
 .back {
@@ -39,6 +40,7 @@
     background: #f0932b;
     margin-top:35px;
     border-radius: 7px;
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 768px) {

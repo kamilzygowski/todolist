@@ -30,6 +30,7 @@
     border:none;
     font-size:20px;
     position: relative;
+    cursor: pointer;
     /*left:-420px;*/
 
 }
@@ -40,6 +41,7 @@
     position: absolute;
     right:55px;
     top: 25px;
+    cursor: pointer;
 }
 
 .logOut:hover {
@@ -96,6 +98,7 @@
     text-align: center;
     font-size:24px;
     color:darksalmon;
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 768px) {
