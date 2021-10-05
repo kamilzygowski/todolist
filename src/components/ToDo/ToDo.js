@@ -165,8 +165,9 @@ class ToDo extends React.Component {
                 </div>
                 <span className="addNewList">
                     <FontAwesomeIcon icon={faPlus} className="plusList" onClick={this.addList} />
-                    <p className="plusListDescription"> add new list </p>
+                    <p className="plusListDescription"> add new list </p>               
                 </span>
+                <a className="refreshServer" href="https://todolist-fake-server.herokuapp.com/"> If you don't see your lists just click here and then come back here :)</a>
             </div>
         );
     }

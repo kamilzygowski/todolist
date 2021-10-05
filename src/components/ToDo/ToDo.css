@@ -90,6 +90,13 @@
     font-size: 32px;
 }
 
+.refreshServer{
+    width:50%;
+    text-align: center;
+    font-size:24px;
+    color:darksalmon;
+}
+
 @media only screen and (max-width: 768px) {
    .pinIcon{
        display:none;
@@ -143,6 +150,10 @@
 
    .doneIcon {
        font-size: 14px;
+   }
+
+   .refreshServer{
+       font-size: 21px;
    }
 
   }
