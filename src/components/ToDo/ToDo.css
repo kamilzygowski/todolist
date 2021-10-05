@@ -52,6 +52,7 @@
     
     right:45px;
     bottom: 45px;
+    cursor: pointer;
 }
 
 .plusList:hover{
@@ -112,6 +113,7 @@
     height: 100%;
     font-size: 14px;
     padding-top: 0;
+    cursor: pointer;
     
    }
 
@@ -133,6 +135,7 @@
 
    .searchInput{
        width:80%;
+       cursor: pointer;
    }
 
    .addNewList{
@@ -140,6 +143,7 @@
        margin:25px auto;
        bottom:0;
        right:0;
+       cursor: pointer;
    }
 
    .createDate{

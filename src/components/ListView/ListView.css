@@ -14,6 +14,7 @@
     width: inherit;
     font-size: 22px;
     margin-bottom: 20px;
+    cursor: pointer;
 }
 
 .saveBtn {
@@ -71,6 +72,7 @@
     font-size: 18px;
     /*text-align: center;*/
     margin-left: 25px;
+    cursor: pointer;
 }
 
 .checkBox {
@@ -132,6 +134,7 @@
     background: #eb2f06;
     border-radius: 10px;
     border:none;
+    cursor: pointer;
 }
 
 .cancelAddBtn:hover {
@@ -149,6 +152,7 @@
     border:none;
     right: -135px;
     font-size: 16px;
+    cursor: pointer;
 }
 
 .addBtn:hover {
@@ -161,6 +165,7 @@
     font-size: 22px;
     color:#eb2f06;
     margin-bottom: 5PX;
+    cursor: pointer;
     
 }
 
@@ -193,6 +198,7 @@
     .addBtn{
         margin-top: 40px;
         right:-10px;
+        
     }
 
     .cancelAddBtn{
