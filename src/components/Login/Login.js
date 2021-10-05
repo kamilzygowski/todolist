@@ -3,10 +3,10 @@ import './Login.css';
 import axios from 'axios';
 
 const accesToken = 'siema';
-const apiUrl = 'http://localhost:8000';
+const {REACT_APP_DB_HOST} = process.env;
 
 const authAxios = axios.create({
-  baseURL: apiUrl,
+  baseURL: REACT_APP_DB_HOST,
   headers: {
     Authorization: `Bearer ${accesToken}`
   }

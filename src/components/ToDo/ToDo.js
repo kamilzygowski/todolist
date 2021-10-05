@@ -43,9 +43,6 @@ class ToDo extends React.Component {
             .then(response => {
                 this.setState({ lists: response.data })
             })
-            .catch(error => {
-                //console.log(error)
-            })
     }
 
     getKeyOfList = (e) => {
