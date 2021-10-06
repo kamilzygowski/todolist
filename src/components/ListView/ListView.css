@@ -183,7 +183,8 @@
 @media only screen and (max-width: 768px) {
     .listView{
         width: 100%;
-        height: 100%;
+        height: 616px;
+        max-height: 100%;
         top:0;
         left:0;
         margin:auto 0;
@@ -252,14 +253,22 @@
     }
 
     .tasks{
-        margin-bottom: 55px;
+        margin-top:50px;
     }
 
     .listSection{
         border-bottom: none;
     }
 
-    .buttonsRow{
+    .buttonsRow1{
+        display: flex;
+        flex-direction: row;
+        bottom: 820px;
+        position:absolute;
+        width: 100%;
+    }
+
+    .buttonsRow2{
         display: flex;
         flex-direction: row;
         margin-top:20px;
