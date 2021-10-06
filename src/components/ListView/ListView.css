@@ -275,7 +275,7 @@
         flex-direction: row;
         justify-content: space-around;
         position:absolute;
-        width: 100%;
+        width: inherit;
         margin: auto 0;
     }
 
