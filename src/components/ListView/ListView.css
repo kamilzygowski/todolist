@@ -183,8 +183,8 @@
 @media only screen and (max-width: 768px) {
     .listView{
         width: 100%;
-        height: 616px;
         max-height: 100%;
+        height: 100%;
         top:0;
         left:0;
         margin:auto 0;
@@ -208,7 +208,7 @@
         margin-top: 40px;
         bottom: 15px;
         right:10px;
-        flex:1;
+        
         margin-top:0;
         right:0;
         top:0;
@@ -220,6 +220,10 @@
         bottom: 0;
         left: 0;
         right: 0;
+        margin:auto auto;
+        background: none;
+        font-weight: 700;
+        color:lawngreen;
     }
 
     .cancelBtn{
@@ -228,14 +232,15 @@
         flex:1;
         bottom: 0;
         left: 0;  
-        background-color: #a5b1c2;
+        color:#fff;
         border-radius: 10px;
+        padding-top: 5px;
     }
 
     .cancelAddBtn{
         margin-top: 40px;
-        right:-50px;
-        flex:1;
+        
+        
         margin-top:0;
         right:0;
         top:0;
@@ -253,7 +258,7 @@
     }
 
     .tasks{
-        margin-top:50px;
+        margin-top:60px;
     }
 
     .listSection{
@@ -263,9 +268,10 @@
     .buttonsRow1{
         display: flex;
         flex-direction: row;
-        
+        justify-content: space-around;
         position:absolute;
         width: 100%;
+        margin: auto 0;
     }
 
     .buttonsRow2{
