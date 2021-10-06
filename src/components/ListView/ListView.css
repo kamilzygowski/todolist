@@ -7,6 +7,7 @@
     position:absolute;
     border-radius: 25px;
     border:1px #485460 solid;
+    z-index: 2;
 }
 
 .listName {
@@ -187,6 +188,11 @@
         left:0;
         margin:auto 0;
         border-radius: 0;
+        max-width: 100%;
+    }
+
+    .listName{
+        margin-left: 0;
     }
 
     .tasksForm{
@@ -199,12 +205,64 @@
 
     .addBtn{
         margin-top: 40px;
-        right:-10px;
-        
+        bottom: 15px;
+        right:10px;
+        flex:1;
+        margin-top:0;
+        right:0;
+        top:0;
+    }
+
+    .saveBtn{
+        position: relative;
+        flex:1;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    .cancelBtn{
+        position: relative;
+        right: 0;
+        flex:1;
+        bottom: 0;
+        left: 0;  
+        background-color: #a5b1c2;
+        border-radius: 10px;
     }
 
     .cancelAddBtn{
         margin-top: 40px;
         right:-50px;
+        flex:1;
+        margin-top:0;
+        right:0;
+        top:0;
+        
+    }
+
+    .buttonsSection{
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        bottom: 30px;
+        margin:0;
+        width: 100%;    
+        
+    }
+
+    .tasks{
+        margin-bottom: 55px;
+    }
+
+    .listSection{
+        border-bottom: none;
+    }
+
+    .buttonsRow{
+        display: flex;
+        flex-direction: row;
+        margin-top:20px;
+        
     }
    }

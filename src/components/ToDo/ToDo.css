@@ -55,6 +55,7 @@
     right:45px;
     bottom: 45px;
     cursor: pointer;
+    z-index: 1;
 }
 
 .plusList:hover{
@@ -131,9 +132,7 @@
 
    .listName{
        font-size: 16px;
-       margin:auto auto;
-       margin-left: -30px;
-       
+       margin:20px auto; 
        justify-content: space-between;
    }
 
@@ -170,6 +169,10 @@
 
    .refreshServer{
        font-size: 21px;
+   }
+
+   .addNewList{
+       
    }
 
   }

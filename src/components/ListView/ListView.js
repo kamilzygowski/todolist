@@ -183,10 +183,16 @@ class ListView extends React.Component {
                     ""
                 }
                 {/* Usage buttons on the display view*/}
-                <button className="addBtn" type="submit" onClick={this.addTask}> ADD TASK </button>
-                <button className="cancelAddBtn" onClick={this.deleteList}> DELETE LIST </button>
-                <a className="cancelBtn" onClick={this.toggleListView}>CANCEL</a>
-                <button className="saveBtn" type="submit" onClick={this.saveChanges}>SAVE</button>
+                <span className="buttonsSection">
+                    <span className="buttonsRow">
+                        <button className="addBtn" type="submit" onClick={this.addTask}> ADD TASK </button>
+                        <button className="cancelAddBtn" onClick={this.deleteList}> DELETE LIST </button>
+                    </span>
+                    <span className="buttonsRow">
+                        <a className="cancelBtn" onClick={this.toggleListView}>CANCEL</a>
+                        <button className="saveBtn" type="submit" onClick={this.saveChanges}>SAVE</button>
+                    </span>
+                </span>
             </div>
         );
     }
