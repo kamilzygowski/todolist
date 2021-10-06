@@ -13,6 +13,7 @@ class ToDo extends React.Component {
         super(props);
 
         this.state = {
+            placeholder: false,
             lists: [],
             viewList: false,
             indexOfList: 0,
@@ -34,13 +35,13 @@ class ToDo extends React.Component {
     }
 
 
-    componentDidMount() {
+    componentDidMount = () => {
         axios.get(`${REACT_APP_DB_HOST}to-do-lists/`, {
             headers: {
                 'Authorization': 'Bearer siema'
             }
         })
-            .then(response => {
+        .then(response => {   
                 this.setState({ lists: response.data })
             })
     }
@@ -53,6 +54,12 @@ class ToDo extends React.Component {
             //console.log(e.target)
         }
 
+    }
+
+    onPlaceholderChange = (value) => {
+        this.setState({
+            placeholder: value
+        })
     }
 
 
@@ -77,11 +84,6 @@ class ToDo extends React.Component {
         this.toggleListView()
     }
 
-
-
-    componentDidUpdate() {
-        this.componentDidMount()
-    }
 
     filterBySearch = () => {
 
@@ -131,8 +133,14 @@ class ToDo extends React.Component {
     }
 
 
-    render() {
+    render = () => {
         const { lists, viewList, indexOfList, renderToDo } = this.state;
+        if (this.state.placeholder === true){
+            this.componentDidMount()
+            this.setState({
+                placeholder: false
+            })
+        }
         return (
             <div className="toDo">
                 <FontAwesomeIcon icon={faSignOutAlt} className="logOut" onClick={this.logged} />
@@ -146,21 +154,22 @@ class ToDo extends React.Component {
                                 return list.name
                             }
                         }).map((list, search) => (
-                            <span className="pinSpan">
-                                <FontAwesomeIcon icon={faThumbtack} className="pinIcon" />
-                                <div className="list" key={list.id} onClick={this.listItemOnClick} onClickCapture={() => this.setState({ indexOfList: list.id })} key={list.id} index={list.id}  >
-                                    <h3 className="listName">{list.name}</h3>
-                                    <p className="createDate"> created today</p>
-                                    <span className="tasksDone">
-                                        <p> Tasks: {list.task.length}</p>
-                                        <FontAwesomeIcon icon={faCheckSquare} className="doneIcon" />
-                                        <p>/{list.task.length} all</p>
+                            <span className="pinSpan" key={list.key}>
+                                <FontAwesomeIcon icon={faThumbtack} className="pinIcon" key={list.key}/>
+                                <div className="list" key={list.id} onClick={this.listItemOnClick} onClickCapture={() => this.setState({ indexOfList: list.id })} index={list.id}  >
+                                    <h3 className="listName" key={list.key}>{list.name}</h3>
+                                    <p className="createDate" key={list.key}> created today</p>
+                                    <span className="tasksDone" key={list.key}>
+                                        <p key={list.key}> Tasks: {list.task.length}</p>
+                                        <FontAwesomeIcon icon={faCheckSquare} className="doneIcon" key={list.key}/>
+                                        <p key={list.key}>/{list.task.length} all</p>
                                     </span>
                                 </div>
-                                <FontAwesomeIcon icon={faThumbtack} className="pinIcon" />
+                                <FontAwesomeIcon icon={faThumbtack} className="pinIcon" key={list.key}/>
                             </span>
                         ))}
-                        {viewList && <ListView toggleListView={this.toggleListView} index={indexOfList} renderToDo={renderToDo} deleteList={this.deleteList} />}
+                        {viewList && <ListView toggleListView={this.toggleListView} index={indexOfList} 
+                        renderToDo={renderToDo} deleteList={this.deleteList} toDoMount={this.componentDidMount} placeholder={this.state.placeholder} onPlaceholderChange={this.onPlaceholderChange}/>}
                     </div>
                 </div>
                 <span className="addNewList">

@@ -13,6 +13,7 @@ class ListView extends React.Component {
         super(props);
 
         this.state = {
+            placeholder: this.props.placeholder,
             lists: [],
             index: 0,
             changeListName: "",
@@ -28,7 +29,7 @@ class ListView extends React.Component {
     }
 
 
-    componentDidMount() {
+    componentDidMount = () => {
         axios.get(`${REACT_APP_DB_HOST}to-do-lists/`, {
             headers: {
                 'Authorization': 'Bearer siema'
@@ -37,6 +38,7 @@ class ListView extends React.Component {
             .then(response => {
                 this.setState({ lists: response.data })
             })
+            
     }
 
     addTask = () => {
@@ -99,6 +101,7 @@ class ListView extends React.Component {
                     ]
                 }).then(() => {
                     this.componentDidMount()
+                    
                 })
             })
     }
@@ -135,6 +138,7 @@ class ListView extends React.Component {
     }
 
     toggleListView = () => {
+        this.props.onPlaceholderChange(true)
         this.props.toggleListView()
     }
 
@@ -142,7 +146,7 @@ class ListView extends React.Component {
         this.props.deleteList()
     }
 
-    render() {
+    render = () => {
         const { lists } = this.state
         return (
             <div className="listView">
@@ -163,15 +167,15 @@ class ListView extends React.Component {
                             {/* These are form inputs and checkmark for every task */}
                             {list.task.map(tasks =>
                                 <form className="tasksForm" key={list.key}>
-                                    <input type="checkbox" className="checkBox"></input>
+                                    <input type="checkbox" className="checkBox" key={list.key}></input>
                                     <input type="text" placeholder="Task name" className="taskNameInput" key={list.id} id={tasks.id} onChange={(e) => this.setState({
                                         changeTaskName: e.target.value
                                     })} onClick={(e) => this.setState({
                                         changeTaskId: e.target.id
                                     })} defaultValue={tasks.name}></input>
-                                    <span className="checkmark"></span>
-                                    <span className="coverSpan">
-                                        <FontAwesomeIcon icon={faTimes} className="deleteTask" id={tasks.id-1} onClick={this.deleteTask} />
+                                    <span className="checkmark" key={list.key}></span>
+                                    <span className="coverSpan" key={list.key}>
+                                        <FontAwesomeIcon icon={faTimes} className="deleteTask" id={tasks.id-1} onClick={this.deleteTask} key={list.key}/>
                                     </span>
                                 </form>
                             )}

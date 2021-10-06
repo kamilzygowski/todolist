@@ -74,6 +74,7 @@
     flex-direction: row;
     font-size:18px;
     font-weight: 700;
+    width: 210px;
 }
 
 .doneIcon {
@@ -99,6 +100,14 @@
     font-size:24px;
     color:darksalmon;
     cursor: pointer;
+}
+
+.listName {
+    margin: 25px auto;
+}
+
+.createDate{
+    margin-right: 40px;
 }
 
 @media only screen and (max-width: 768px) {
