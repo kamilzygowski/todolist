@@ -183,13 +183,14 @@
 @media only screen and (max-width: 768px) {
     .listView{
         width: 100%;
+        
         max-height: 100%;
-        height: 100%;
         top:0;
         left:0;
         margin:auto 0;
         border-radius: 0;
         max-width: 100%;
+        padding:0;
     }
 
     .listName{
@@ -224,6 +225,7 @@
         background: none;
         font-weight: 700;
         color:lawngreen;
+        background: #1e272e;
     }
 
     .cancelBtn{
@@ -232,9 +234,11 @@
         flex:1;
         bottom: 0;
         left: 0;  
-        color:#fff;
+        color:darkred;
         border-radius: 10px;
         padding-top: 5px;
+        font-weight: 700;
+        background: #d1d8e0;
     }
 
     .cancelAddBtn{

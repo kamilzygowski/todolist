@@ -114,6 +114,7 @@
 @media only screen and (max-width: 768px) {
     .toDo{
         max-width: 100%;
+        
     }
 
    .pinIcon{
@@ -125,6 +126,11 @@
        display: flex;
        max-width: 100%;
        
+   }
+
+   .pinSpan{
+    padding:0;
+    display: none;
    }
 
    .list{
