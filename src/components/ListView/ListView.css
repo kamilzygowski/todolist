@@ -263,7 +263,7 @@
     .buttonsRow1{
         display: flex;
         flex-direction: row;
-        bottom: 820px;
+        
         position:absolute;
         width: 100%;
     }
